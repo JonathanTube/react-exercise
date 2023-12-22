@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>event</title>
+    <style>
+      .layer1 {
+        width: 300px;
+        height: 300px;
+        background-color: blue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+      }
+      .layer2 {
+        width: 200px;
+        height: 200px;
+        margin: 20px;
+        background-color: aquamarine;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100%;
+      }
+      .layer3 {
+        width: 100px;
+        height: 100px;
+        margin: 20px;
+        background-color: red;
+        border-radius: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layer1">
+      <div class="layer2">
+        <div class="layer3"></div>
+      </div>
+    </div>
+  </body>
+  <script>
+    // 事件委托:只需要给容器做一个事件绑定点击内部的任何元素，根据事件的冒泡传播机制，都会让容器的点击事件也触发;我们在这里，根据事件源，做不同的事情就可以了;J
+    // 提高JS代码运行的性能，并且把处理的逻辑都集中在一起!!
+    const body = document.body
+    body.addEventListener("click", function (ev) {
+      // ev.target:事件源 点击的是谁，谁就是事件源
+      let target = ev.target,
+        id = target.id
+      if (id === "root") {
+        console.log(" root")
+        return
+      }
+      if (id === "outer") {
+        console.log("outer")
+        return
+      }
+      if (id === "inner") {
+        console.log("inner")
+        return
+      }
+      // 如果以上都不是，我们处理啥....
+    })
+    /**
+     *  执行顺序:
+     *  demo5.html:69 layer1 捕获
+     *  demo5.html:57 layer2 捕获
+     *  demo5.html:45 layer3 捕获
+     *  demo5.html:51 layer3 冒泡
+     *  demo5.html:63 layer2 冒泡
+     *  demo5.html:75 layer1 冒泡
+     */
+    document.querySelector(".layer3").addEventListener(
+      "click",
+      () => {
+        console.log("layer3 捕获")
+      },
+      true
+    )
+
+    document.querySelector(".layer3").addEventListener("click", () => {
+      console.log("layer3 冒泡")
+    })
+
+    document.querySelector(".layer2").addEventListener(
+      "click",
+      () => {
+        console.log("layer2 捕获")
+      },
+      true
+    )
+
+    document.querySelector(".layer2").addEventListener("click", () => {
+      console.log("layer2 冒泡")
+    })
+
+    document.querySelector(".layer1").addEventListener(
+      "click",
+      () => {
+        console.log("layer1 捕获")
+      },
+      true
+    )
+
+    document.querySelector(".layer1").addEventListener("click", (event) => {
+      console.log("layer1 冒泡")
+      // 阻止事件传播，在当前层级后，全部阻止
+      // 当前层级对象绑定的多个事件都会执行
+      event.stopPropagation()
+      // 阻止事件传播，在当前层级后，全部阻止
+      // 当前层级对象绑定多个事件只有这个会执行，其他不执行
+      event.stopImmediatePropagation()
+    })
+  </script>
+</html>

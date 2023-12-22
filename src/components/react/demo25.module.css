@@ -1,0 +1,15 @@
+.box {
+  width: 100px;
+  height: 200px;
+  background: red;
+  color: #fff;
+}
+
+.main {
+  font-size: 30px;
+}
+
+/* 强制不编译 */
+:global(.subChild) {
+  font-weight: bold;
+}

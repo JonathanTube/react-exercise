@@ -1,0 +1,5 @@
+export const INCREASE_SUPPORT_NUM = "INCREASE_SUPPORT_NUM"
+export const INCREASE_DISAPPROVAL_NUM = "INCREASE_DISAPPROVAL_NUM"
+
+export const CASE_0 = "CASE_0"
+export const CASE_1 = "CASE_1"

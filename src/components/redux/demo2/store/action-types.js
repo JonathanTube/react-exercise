@@ -1,0 +1,2 @@
+export const SUPPORT_NUM = "SUPPORT_NUM"
+export const DISAPPROVAL_NUM = "DISAPPROVAL_NUM"
