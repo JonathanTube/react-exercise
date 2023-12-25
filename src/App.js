@@ -1,4 +1,4 @@
-import Vote from "./components/redux/demo2/vote.container"
+import Vote from "./components/redux/demo4/vote.container"
 function App() {
   return (
     <div>
