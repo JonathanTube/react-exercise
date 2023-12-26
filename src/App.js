@@ -1,8 +1,8 @@
-import Vote from "./components/redux/demo5/vote.container"
+import Main from "./components/router/version5/demo2/main"
 function App() {
   return (
     <div>
-      <Vote />
+      <Main />
     </div>
   )
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Html Hash</title>
+  </head>
+  <body>
+    <div>
+      <a href="#/">首页</a>
+      <a href="#/product">产品</a>
+      <a href="#/price">价格</a>
+    </div>
+    <!-- 变化的区域内容 -->
+    <div class="route-content"></div>
+  </body>
+
+  <script type="text/javascript">
+    const routes = [
+      {
+        path: "/",
+        component: "我是首页"
+      },
+      {
+        path: "/product",
+        component: "我是产品"
+      },
+      {
+        path: "/price",
+        component: "我是价格"
+      }
+    ]
+    // 设置首页
+    location.hash = "#/"
+    // 监听hash变化
+    window.onhashchange = () => {
+      let hash = location.hash
+      // 找到匹配的hash路径
+      let route = routes.find((route) => route.path === hash.substring(1))
+      // 设置区域内容
+      document.querySelector(".route-content").innerHTML = route.component
+    }
+  </script>
+</html>

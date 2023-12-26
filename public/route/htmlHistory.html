@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Html Hash</title>
+  </head>
+  <body>
+    <nav>
+      <a href="/">首页</a>
+      <a href="/product">产品</a>
+      <a href="/price">价格</a>
+    </nav>
+    <!-- 变化的区域内容 -->
+    <div class="route-content"></div>
+  </body>
+
+  <script type="text/javascript">
+    const routes = [
+      {
+        path: "/",
+        component: "我是首页"
+      },
+      {
+        path: "/product",
+        component: "我是产品"
+      },
+      {
+        path: "/price",
+        component: "我是价格"
+      }
+    ]
+
+    document.querySelector("nav").onclick = (event) => {
+      let { pathname, tagName } = event.target
+      // 如果点击的不是链接，跳过
+      if (tagName !== "A") return
+      // 1-参数
+      // 2-title，没用，被浏览器忽略
+      // 3-path路径
+      history.pushState({}, "", pathname)
+      changeRoute()
+      // 禁止默认跳转
+      event.preventDefault()
+    }
+
+    const changeRoute = () => {
+      // path路径
+      let pathname = location.pathname
+      // 找到匹配的path路径
+      let route = routes.find((route) => route.path === pathname)
+      // 设置区域内容
+      if (route) {
+        document.querySelector(".route-content").innerHTML = route.component
+      }
+    }
+    // 设置首页
+    history.pushState({}, "", "/route")
+    changeRoute()
+    // 监听history变化：只能监听pop,go,back,forward方法，pushState没用
+    window.onpopstate = () => changeRoute()
+  </script>
+</html>
