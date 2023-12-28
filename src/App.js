@@ -1,8 +1,9 @@
-import Main from "./components/router/version5/demo5/main"
+// import Main from "./components/router/version5/demo5/main"
+import Demo from "./components/react/demo28"
 function App() {
   return (
     <div>
-      <Main />
+      <Demo />
     </div>
   )
 }
